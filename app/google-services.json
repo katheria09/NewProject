@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "572884599535",
+    "firebase_url": "https://vhp-members.firebaseio.com",
+    "project_id": "vhp-members",
+    "storage_bucket": "vhp-members.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:572884599535:android:e799ebd013e7047b",
+        "android_client_info": {
+          "package_name": "katheria.vhp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "572884599535-17p3gl5rc18mi56hh9id1tvrqce6e800.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "katheria.vhp",
+            "certificate_hash": "DC47C97934D4DB9BEB98422413467C2AFF48E7DD"
+          }
+        },
+        {
+          "client_id": "572884599535-efq4acugduu2phv8osn0mrmomeb9oag4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCAD6lx7c8dYXZGLi-NXNiq5duMW0l2UWE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "572884599535-efq4acugduu2phv8osn0mrmomeb9oag4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
