@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -46,18 +47,22 @@ public class RegisterActivity extends AppCompatActivity {
             "Assam", "Bihar", "Chandigarh","Delhi","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala",
             "Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Orissa","Pondicherry","Punjab","Rajasthan","Tamil Nadu",
             "Tripura","Uttar Pradesh","Uttaranchal","West Bengal"};
-
-    static RegisterActivity registerActivity;
     Button next;
-    EditText email, password, name, phone, address,block;
+    EditText email,name, phone, address,block;
     boolean updateded =true;
     String selected_state;
+    String Useremail;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Bundle bundleget =getIntent().getExtras();
+        Useremail=bundleget.getString("Email");
+        email = (EditText)findViewById(R.id.emailnew);
+        email.setEnabled(false);
+        email.setText(Useremail);
         Spinner_state = (Spinner) findViewById(R.id.spinner_state);
         Spinner_district = (Spinner) findViewById(R.id.spinner_district);
         Spinner_designation = (Spinner) findViewById(R.id.spinner_designation);
@@ -76,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 selected_state=Spinner_state.getSelectedItem().toString();
-                setCitySppin();
+                setCitySpin();
 
             }
 
@@ -87,13 +92,27 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
 
-        email = (EditText)findViewById(R.id.email);
-        password = (EditText)findViewById(R.id.password);
+
         name = (EditText)findViewById(R.id.name);
         phone = (EditText)findViewById(R.id.phone);
         address= (EditText) findViewById(R.id.address);
         block= (EditText) findViewById(R.id.block);
         next = (Button)findViewById(R.id.next);
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                new HttpCall().checkUniquePhone(context, phone.getText().toString(), phone, next);
+            }
+        });
 
 
         next.setOnClickListener(new View.OnClickListener() {
@@ -101,7 +120,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (updateded) {
                     if (!email.getText().toString().equals("") &&
-                            !password.getText().toString().equals("") &&
                             !name.getText().toString().equals("") &&
                             Spinner_designation.getSelectedItemPosition() != 0 &&
                             Spinner_designation2.getSelectedItemPosition() != 0 &&
@@ -116,7 +134,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                         {
                             model_register.email = email.getText().toString();
-                            model_register.password = password.getText().toString();
                             model_register.name = name.getText().toString();
                             model_register.phone = phone.getText().toString();
                             model_register.designation = Spinner_designation.getSelectedItem().toString();
@@ -127,24 +144,14 @@ public class RegisterActivity extends AppCompatActivity {
                             model_register.state = Spinner_state.getSelectedItem().toString();
 
 
+                            new HttpCall().register(context,model_register);
 
-                            Log.e("check phone","1");
-
-                            new HttpCall().checkUniquePhone(context, phone.getText().toString(), phone, next, true, model_register);
-
-                            Toast.makeText(RegisterActivity.this, "Successfully registered", Toast.LENGTH_SHORT);
-                            Intent intent= new Intent(RegisterActivity.this,AccoutnActivity.class);
+                            Toast.makeText(RegisterActivity.this, "Successfully registered ,\n Login with your email and password", Toast.LENGTH_LONG);
+                            /*Intent intent= new Intent(RegisterActivity.this,LoginActivity.class);
                             startActivity(intent);
-
+*/
                         } else {
-
-
                             Snackbar.make(v, "Please enter details correctly", Snackbar.LENGTH_LONG).show();
-                        /*new HttpCall().register(getContext(), userName.getText().toString(),
-                                password.getText().toString(), name.getText().toString(),
-                                phone.getText().toString(), cityList.get(city.getSelectedItemPosition()),
-                                "", "", "", true,
-                                new AppPreferences().getloadFragRegister(context));*/
                         }
                     }  else {
                         Snackbar.make(v, "Please enter details correctly", Snackbar.LENGTH_LONG).show();
@@ -155,34 +162,19 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
-       email.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                new HttpCall().checkEmail(context, email.getText().toString(), email, next);
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
     }
 
-    private void setCitySppin() {
+    private void setCitySpin() {
         Spinner_district.setAdapter(new ArrayAdapter<String>(context,android.R.layout.simple_list_item_1,cityList));
 
             new HttpCall().getDistrictList(context,selected_state,Spinner_district);
     }
-    public static RegisterActivity getInstance(){
-        return registerActivity;
-    }
+
 
     private void setUpToolBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setTitle("Register");
+        actionBar.setTitle("User Profile");
     }
 }

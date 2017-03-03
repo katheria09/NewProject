@@ -1,0 +1,143 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="katheria.vhp.Fragment.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            >
+
+
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorPrimary"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/text"
+                android:padding="2dp">
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Name"
+                    android:inputType="textPersonName"
+                    android:lines="1"
+                    android:textSize="12sp"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Name"
+                    app:met_iconLeft="@drawable/ic_perm_identity_black_24dp"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/colorPrimary" />
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Phone Number"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:textSize="12sp"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Phone Number"
+                    app:met_iconLeft="@drawable/ic_call_black_24dp"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/colorPrimary" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="E-mail"
+                    android:inputType="textEmailAddress"
+                    android:lines="1"
+                    android:textSize="12sp"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="E-mail"
+                    app:met_iconLeft="@drawable/ic_email_black_24dp"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/colorPrimary" />
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/dateOfBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date of Birth"
+                    android:inputType="date"
+                    android:lines="1"
+                    android:textSize="12sp"
+                    android:maxLength="10"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Date of Birth"
+                    app:met_iconLeft="@drawable/ic_date_range_black_24dp"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/colorPrimary" />
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address"
+                    android:inputType="textPostalAddress"
+                    android:textSize="12sp"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Name"
+                    app:met_iconLeft="@drawable/ic_location_city_black_24dp"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/colorPrimary" />
+
+                <Button
+                    android:id="@+id/save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginTop="25dp"
+                    android:textColor="@color/white"/>
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

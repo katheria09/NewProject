@@ -6,7 +6,12 @@ package katheria.vhp.Model;
 
 public class Model_userDetails {
 
-    public   String userName;
-    public   String userEmail;
-
+    public   String name;
+    public   String email;
+    public   String mobile;
+    public   String state;
+    public   String district;
+    public   String block;
+    public   String village;
+    public   String designation;
 }

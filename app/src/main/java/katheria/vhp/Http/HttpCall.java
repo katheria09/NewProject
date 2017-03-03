@@ -16,7 +16,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import katheria.vhp.Activity.AccoutnActivity;
+import katheria.vhp.Activity.AccountActivity;
+import katheria.vhp.Activity.LoginActivity;
+import katheria.vhp.Activity.NewUserActivity;
+import katheria.vhp.Activity.RegisterActivity;
+import katheria.vhp.Fragment.ProfileFragment;
 import katheria.vhp.Model.Model_register;
 import katheria.vhp.ShowProgressDialog;
 
@@ -53,7 +57,6 @@ public class HttpCall {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 showProgressDialog.dismiss();
-                Log.d("ABc","onsuccess");
 
                 new DataParser().parseDistrictList(context, response,spndistrict);
             }
@@ -69,8 +72,7 @@ public class HttpCall {
         );
     }
 
-    public void checkUniquePhone(final Context context, final String phone, final EditText ph, final Button next,
-                                 final boolean b, final Model_register model_register) {
+    public void checkUniquePhone(final Context context, final String phone, final EditText ph, final Button next) {
         RequestParams requestParams = new RequestParams();
         requestParams.put("phone", phone);
 
@@ -80,25 +82,27 @@ public class HttpCall {
 
                     @Override
                     public void onStart() {
-                        showProgressDialog.show();
+                    //    showProgressDialog.show();
                     }
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        showProgressDialog.dismiss();
+                      //  showProgressDialog.dismiss();
 
                         result = new DataParser().praseUniqueEmail(context, response);
                         if (result == 0 && !ph.getText().toString().contains(" ")) {
                             ph.setError(null);
+                            next.setVisibility(View.VISIBLE);
 
-                            Log.e("not reg","2");
-                            new HttpCall().register(context,model_register);
+
 
                         } else if (result == 1) {
 
-                            Log.d("Reg","2");
-                            ph.setError("User Already Registered");
+                            next.setVisibility(View.GONE);
+                            ph.setError("Mobile No Already Registered");
+
                         } else if (ph.getText().toString().contains(" ")) {
+                            next.setVisibility(View.GONE);
                             ph.setError("Phone Number should not contain spaces");
 
                         }
@@ -150,10 +154,51 @@ public class HttpCall {
         );
     }
 
+    public void checkGoogleEmail(final Context context, final String email) {
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("email", email);
+
+        defineDialog(context);
+
+        EndPoints.checkEmail(requestParams, new JsonHttpResponseHandler() {
+
+                    @Override
+                    public void onStart() {
+                            showProgressDialog.show();
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                          showProgressDialog.dismiss();
+
+                        result = new DataParser().parseCheckEmail(context, response);
+                        if (result == 1) {
+                            Intent intent = new Intent(context, AccountActivity.class);
+                            intent.putExtra("Email", email);
+                            context.startActivity(intent);
+
+
+
+                        } else  {
+                            Intent i = new Intent(context, RegisterActivity.class);
+                            i.putExtra("Email", email);
+                            context.startActivity(i);
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers,
+                                          Throwable throwable, JSONObject errorResponse) {
+                        showProgressDialog.dismiss();
+                    }
+                }
+        );
+    }
+
     public void register(final Context context, final Model_register model_register) {
         RequestParams requestParams = new RequestParams();
         requestParams.put("email", model_register.email);
-        requestParams.put("password", model_register.password);
         requestParams.put("phone", model_register.phone);
         requestParams.put("name", model_register.name);
         requestParams.put("state", model_register.state);
@@ -178,15 +223,14 @@ public class HttpCall {
                         showProgressDialog.dismiss();
 
                         result = new DataParser().praseRegister(context,
-                                response, false);
+                                response);
                         if (result == 1) {
-                            Log.e("ABc","Registered Successfully");
+
+                            Toast.makeText(context,"Successfully registered ,\n Login with your email and password",Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(context, LoginActivity.class);
+                            context.startActivity(intent);
 
 
-                            //new HttpCall().addNotificationToken(context, new AppPreferences().getToken(context));
-
-
-                           new HttpCall().getUserDetails(context, new Intent(context, AccoutnActivity.class), model_register.email.toString());
                         }
                     }
 
@@ -203,25 +247,27 @@ public class HttpCall {
 
         return;
     }
-    public void getUserDetails(final Context context, final Intent intent,
-                               String email) {
+    public void getUserDetails(final Context context, String email) {
         RequestParams requestParams = new RequestParams();
+        Log.e("ABC2",email);
         requestParams.put("email", email);
 
         defineDialog(context);
 
 
-      /*  EndPoints.getUserDetails(requestParams, new JsonHttpResponseHandler() {
+        EndPoints.getUserDetails(requestParams, new JsonHttpResponseHandler() {
 
                     @Override
                     public void onStart() {
-                        //showProgressDialog.show();
+                        showProgressDialog.show();
                     }
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        showProgressDialog.dismiss();
+                        new DataParser().getUserDetails(context, response);
+                        Log.e("ABC1","returned");
 
-                        //   showProgressDialog.dismiss();
                     }
 
                     @Override
@@ -230,6 +276,6 @@ public class HttpCall {
 
                     }
                 }
-        );*/
+        );
     }
 }

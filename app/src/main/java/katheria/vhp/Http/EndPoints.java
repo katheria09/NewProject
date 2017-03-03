@@ -1,6 +1,7 @@
 package katheria.vhp.Http;
 
 import android.os.Looper;
+import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -37,6 +38,10 @@ public class EndPoints {
     }
     public static void  register (RequestParams requestParams,AsyncHttpResponseHandler asyncHttpResponseHandler){
         getClient().post(Config.URL_REGISTER, requestParams, asyncHttpResponseHandler);
+    }
+    public static void  getUserDetails (RequestParams requestParams,AsyncHttpResponseHandler asyncHttpResponseHandler){
+        Log.e("ABC","endpoints");
+        getClient().post(Config.URL_GET_USER_DETAILS, requestParams, asyncHttpResponseHandler);
     }
 
 

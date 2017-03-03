@@ -23,7 +23,7 @@ public class Dai extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //this.setContentView(R.layout.sialog);
+        this.setContentView(R.layout.sialog);
 
     }
 }

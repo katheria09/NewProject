@@ -7,7 +7,6 @@ package katheria.vhp.Model;
 public class Model_register {
 
     public String email;
-    public String password;
     public String name;
     public String phone;
     public String designation;

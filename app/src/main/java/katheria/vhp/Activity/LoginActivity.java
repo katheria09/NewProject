@@ -1,5 +1,7 @@
 package katheria.vhp.Activity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +11,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import katheria.vhp.Http.HttpCall;
 import katheria.vhp.Model.Model_userDetails;
 import katheria.vhp.R;
 
@@ -38,9 +40,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private static String TAG = "LOGIN_ACTIVITY";
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
+    Context context = LoginActivity.this;
     public FirebaseAuth.AuthStateListener mAuthListener;
     private EditText mEmailField,mPasswordField;
     TextView register;
+    private String Email ;
     Model_userDetails model_userDetails = new Model_userDetails(); ;
 
 
@@ -59,15 +63,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user!=null) {
 
-                    model_userDetails.userName = user.getDisplayName().toString();
-                    model_userDetails.userEmail = user.getEmail().toString();
+                   // new HttpCall().checkGoogleEmail(context, Email);
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("Name",model_userDetails.userName);
-                    bundle.putString("Email",model_userDetails.userEmail);
-                    startActivity(new Intent(LoginActivity.this, AccoutnActivity.class).putExtras(bundle));
-
-                    Log.d("AUTH", "user logged in" + user.getEmail());
                 }
 
                 else
@@ -88,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         register.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this,NewUserActivity.class));
             }
         });
 
@@ -119,6 +116,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             {
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
+                Email = mAuth.getCurrentUser().getEmail().toString();
+                //Toast.makeText(LoginActivity.this,"Email"+Email,Toast.LENGTH_SHORT).show();
+
+                new HttpCall().checkGoogleEmail(context, Email);
+                /*Intent i = new Intent(LoginActivity.this, AccountActivity.class);
+                i.putExtra("Email", mAuth.getCurrentUser().getEmail());
+                startActivity(i);*/
             }
             else
                 Log.d(TAG,"Google login failed ");
@@ -157,15 +161,27 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
         else
         {
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if (!task.isSuccessful())
-                    {
-                        Toast.makeText(LoginActivity.this,"Sign In Problem",Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });}
+
+            final ProgressDialog progressDialog = ProgressDialog.show(LoginActivity.this, "Please wait...", "Proccessing...", true);
+
+            (mAuth.signInWithEmailAndPassword(email,password))
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
+
+                            if (task.isSuccessful()) {
+                                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(LoginActivity.this, AccountActivity.class);
+                                i.putExtra("Email", mAuth.getCurrentUser().getEmail());
+                                startActivity(i);
+                            } else {
+                                Log.e("ERROR", task.getException().toString());
+                                Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+                    });}
 
     }
     @Override

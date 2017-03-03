@@ -11,6 +11,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 
+import katheria.vhp.Fragment.ProfileFragment;
+import katheria.vhp.Model.Model_userDetails;
+
 
 /**
  * Created by shekh on 30-Jan-17.
@@ -114,7 +117,7 @@ public class DataParser {
         return 0;
     }
 
-    public int praseRegister(Context context, JSONObject jsonObject, boolean guest) {
+    public int praseRegister(Context context, JSONObject jsonObject) {
         try {
             {
 
@@ -145,6 +148,61 @@ public class DataParser {
 
 
         return 0;
+    }
+
+    public void getUserDetails(Context context, JSONObject jsonObject) {
+        Log.e("ABC1","data parser");
+
+        ArrayList<Model_userDetails> arrayList = new ArrayList<>();
+
+        try {
+            {
+
+                JSONArray message = jsonObject.getJSONArray("data");
+
+                boolean success = false;
+
+                for (int i = 0; i < message.length(); i++) {
+
+                    JSONObject temp = message.getJSONObject(i);
+                    if (i == 0) {
+                        if (temp.getString("success").equals("1")) {
+                            success = true;
+                        }
+                    }
+                    if (i != 0 && success) {
+                        Model_userDetails modalIUserDetails = new Model_userDetails();
+                        modalIUserDetails.email = temp.getString("email");
+                        Log.e("ABCdata",temp.getString("email"));
+                        Log.e("ABCdata",temp.getString("name"));
+                        modalIUserDetails.name = temp.getString("name");
+                        modalIUserDetails.mobile = temp.getString("mobile");
+                        modalIUserDetails.state = temp.getString("state");
+                        modalIUserDetails.district = temp.getString("district");
+                        modalIUserDetails.block = temp.getString("block");
+                        modalIUserDetails.village = temp.getString("village");
+                        modalIUserDetails.designation = temp.getString("designation");
+
+                        Log.e("ABC1","adding");
+                        arrayList.add(modalIUserDetails);
+                        Log.e("ABC1",modalIUserDetails.email);
+
+
+                    }
+
+
+                }
+
+                Log.e("ABC1","returning");
+                return ;
+
+
+
+            }
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
+
     }
 public String getEmail(){
     return email;
