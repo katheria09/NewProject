@@ -25,7 +25,6 @@ public class AccountActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String useremail;
     Context context = AccountActivity.this;
-    Model_userDetails model_userDetails = new Model_userDetails();
     NavigationView navigationView = null;
     Toolbar toolbar = null;
     TextView nav_name,nav_email;
@@ -62,7 +61,7 @@ public class AccountActivity extends AppCompatActivity
         nav_name = (TextView) findViewById(R.id.nav_name);
         nav_email = (TextView) findViewById(R.id.nav_email);
 //        nav_name.setText(model_userDetails.name);
-    //    nav_email.setText(model_userDetails.email);
+//        nav_email.setText(useremail);
         navigationView.setNavigationItemSelectedListener(this);
 
 

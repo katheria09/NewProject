@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import katheria.vhp.Fragment.HomeFragment;
 import katheria.vhp.Http.HttpCall;
 import katheria.vhp.Model.Model_register;
 import katheria.vhp.R;
@@ -126,6 +127,11 @@ public class NewUserInputActivity extends AppCompatActivity {
 
 
                             new HttpCall().inputnewuser(context,model_register);
+                            /*HomeFragment fragment = new HomeFragment();
+                            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container,fragment);
+                            fragmentTransaction.commit();*/
+
 
 
                         } else {
@@ -155,4 +161,5 @@ public class NewUserInputActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("New User Input");
     }
+
 }

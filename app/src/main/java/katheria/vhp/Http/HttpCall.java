@@ -1,7 +1,10 @@
 package katheria.vhp.Http;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,16 +22,19 @@ import cz.msebera.android.httpclient.Header;
 import katheria.vhp.Activity.AccountActivity;
 import katheria.vhp.Activity.LoginActivity;
 import katheria.vhp.Activity.RegisterActivity;
+import katheria.vhp.Fragment.HomeFragment;
 import katheria.vhp.Model.Model_register;
+import katheria.vhp.R;
 import katheria.vhp.ShowProgressDialog;
 
+import static java.security.AccessController.getContext;
 
 
 /**
  * Created by shekh on 30-Jan-17.
  */
 
-public class HttpCall {
+public class HttpCall extends AppCompatActivity{
 
     int result;
     ShowProgressDialog showProgressDialog;
@@ -276,6 +282,11 @@ public class HttpCall {
                         if (result == 1) {
 
                             Toast.makeText(context,"Successfully saved",Toast.LENGTH_LONG).show();
+                            HomeFragment fragment = new HomeFragment();
+                            android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.fragment_container,fragment);
+                            fragmentTransaction.commit();
+
 
 
                             /*Intent intent = new Intent(context, AccountActivity.class);
@@ -329,4 +340,6 @@ public class HttpCall {
                 }
         );
     }
+
+
 }

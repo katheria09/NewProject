@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import katheria.vhp.Activity.NewUserInputActivity;
@@ -51,6 +52,7 @@ public class HomeFragment extends Fragment {
         //Email= dp.getArrayList().get(0).email;
 
         setDetails();
+
 
         return view;
 
