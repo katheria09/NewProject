@@ -18,14 +18,17 @@ import android.widget.Toast;
 import katheria.vhp.Fragment.HomeFragment;
 import katheria.vhp.Fragment.ProfileFragment;
 import katheria.vhp.Http.HttpCall;
+import katheria.vhp.Model.Model_userDetails;
 import katheria.vhp.R;
 
 public class AccountActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     String useremail;
     Context context = AccountActivity.this;
+    Model_userDetails model_userDetails = new Model_userDetails();
     NavigationView navigationView = null;
     Toolbar toolbar = null;
+    TextView nav_name,nav_email;
 
 
 
@@ -56,7 +59,13 @@ public class AccountActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
+        nav_name = (TextView) findViewById(R.id.nav_name);
+        nav_email = (TextView) findViewById(R.id.nav_email);
+//        nav_name.setText(model_userDetails.name);
+    //    nav_email.setText(model_userDetails.email);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override

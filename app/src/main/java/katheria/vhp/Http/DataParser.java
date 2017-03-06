@@ -21,6 +21,8 @@ import katheria.vhp.Model.Model_userDetails;
 
 public class DataParser {
     String email;
+    private static ArrayList<Model_userDetails> arrayList;
+    Model_userDetails modalIUserDetails;
 
 
 
@@ -117,7 +119,7 @@ public class DataParser {
         return 0;
     }
 
-    public int praseRegister(Context context, JSONObject jsonObject) {
+    public int parseRegister(Context context, JSONObject jsonObject) {
         try {
             {
 
@@ -151,9 +153,9 @@ public class DataParser {
     }
 
     public void getUserDetails(Context context, JSONObject jsonObject) {
-        Log.e("ABC1","data parser");
+        Log.e("ABC1", "data parser");
 
-        ArrayList<Model_userDetails> arrayList = new ArrayList<>();
+        arrayList = new ArrayList<>();
 
         try {
             {
@@ -171,10 +173,8 @@ public class DataParser {
                         }
                     }
                     if (i != 0 && success) {
-                        Model_userDetails modalIUserDetails = new Model_userDetails();
+                        modalIUserDetails = new Model_userDetails();
                         modalIUserDetails.email = temp.getString("email");
-                        Log.e("ABCdata",temp.getString("email"));
-                        Log.e("ABCdata",temp.getString("name"));
                         modalIUserDetails.name = temp.getString("name");
                         modalIUserDetails.mobile = temp.getString("mobile");
                         modalIUserDetails.state = temp.getString("state");
@@ -183,19 +183,13 @@ public class DataParser {
                         modalIUserDetails.village = temp.getString("village");
                         modalIUserDetails.designation = temp.getString("designation");
 
-                        Log.e("ABC1","adding");
+
                         arrayList.add(modalIUserDetails);
-                        Log.e("ABC1",modalIUserDetails.email);
 
-
+                        Log.e("abc", arrayList.get(0).email);
                     }
 
-
                 }
-
-                Log.e("ABC1","returning");
-                return ;
-
 
 
             }
@@ -203,10 +197,12 @@ public class DataParser {
             e1.printStackTrace();
         }
 
+
     }
-public String getEmail(){
-    return email;
-}
+    public static ArrayList<Model_userDetails> getArrayList()
+    {
+        return arrayList;
+    }
 
 
 }

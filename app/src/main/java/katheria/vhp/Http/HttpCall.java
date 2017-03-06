@@ -18,9 +18,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 import katheria.vhp.Activity.AccountActivity;
 import katheria.vhp.Activity.LoginActivity;
-import katheria.vhp.Activity.NewUserActivity;
 import katheria.vhp.Activity.RegisterActivity;
-import katheria.vhp.Fragment.ProfileFragment;
 import katheria.vhp.Model.Model_register;
 import katheria.vhp.ShowProgressDialog;
 
@@ -222,13 +220,66 @@ public class HttpCall {
 
                         showProgressDialog.dismiss();
 
-                        result = new DataParser().praseRegister(context,
+                        result = new DataParser().parseRegister(context,
                                 response);
                         if (result == 1) {
 
                             Toast.makeText(context,"Successfully registered ,\n Login with your email and password",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(context, LoginActivity.class);
                             context.startActivity(intent);
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers,
+                                          Throwable throwable, JSONObject errorResponse) {
+                        Log.e("error", errorResponse.toString() + " ");
+
+                        showProgressDialog.dismiss();
+                    }
+
+                }
+        );
+
+        return;
+    }
+
+    public void inputnewuser(final Context context, final Model_register model_register) {
+        RequestParams requestParams = new RequestParams();
+        requestParams.put("phone", model_register.phone);
+        requestParams.put("name", model_register.name);
+        requestParams.put("state", model_register.state);
+        requestParams.put("district", model_register.district);
+        requestParams.put("block", model_register.block);
+        requestParams.put("village", model_register.address);
+        requestParams.put("designation", model_register.designation+" "+model_register.designation2);
+
+
+        defineDialog(context);
+
+        EndPoints.register(requestParams, new JsonHttpResponseHandler() {
+
+                    @Override
+                    public void onStart() {
+                        showProgressDialog.show();
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                        showProgressDialog.dismiss();
+
+                        result = new DataParser().parseRegister(context,
+                                response);
+                        if (result == 1) {
+
+                            Toast.makeText(context,"Successfully saved",Toast.LENGTH_LONG).show();
+
+
+                            /*Intent intent = new Intent(context, AccountActivity.class);
+                            context.startActivity(intent);*/
 
 
                         }

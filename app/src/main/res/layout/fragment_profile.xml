@@ -41,7 +41,7 @@
 
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/name"
+                    android:id="@+id/frag_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
@@ -57,7 +57,7 @@
 
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/phone"
+                    android:id="@+id/frag_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone Number"
@@ -73,7 +73,7 @@
                     app:met_primaryColor="@color/colorPrimary" />
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/email"
+                    android:id="@+id/frag_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="E-mail"
@@ -89,7 +89,7 @@
 
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/dateOfBirth"
+                    android:id="@+id/frag_dateOfBirth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Date of Birth"
@@ -105,7 +105,7 @@
                     app:met_primaryColor="@color/colorPrimary" />
 
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/address"
+                    android:id="@+id/frag_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Address"

@@ -30,6 +30,8 @@
         <activity android:name=".Activity.Splash" />
         <activity android:name=".Activity.RegisterActivity" />
         <activity android:name=".Activity.NewUserActivity" />
+        <activity android:name=".Activity.NewUserInputActivity" />
+        <activity android:name=".Activity.SearchUserActivity"></activity>
     </application>
 
 </manifest>

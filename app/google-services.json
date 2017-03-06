@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "572884599535-17p3gl5rc18mi56hh9id1tvrqce6e800.apps.googleusercontent.com",
+          "client_id": "572884599535-4au6vd5crc2k2dcovvm17i0j39dd4dti.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "katheria.vhp",
-            "certificate_hash": "DC47C97934D4DB9BEB98422413467C2AFF48E7DD"
+            "certificate_hash": "dc47c97934d4db9beb98422413467c2aff48e7dd"
           }
         },
         {
