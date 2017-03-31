@@ -12,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import katheria.vhp.Fragment.HomeFragment;
 import katheria.vhp.Fragment.ProfileFragment;
+import katheria.vhp.Http.DataParser;
 import katheria.vhp.Http.HttpCall;
 import katheria.vhp.Model.Model_userDetails;
 import katheria.vhp.R;
@@ -28,6 +30,8 @@ public class AccountActivity extends AppCompatActivity
     NavigationView navigationView = null;
     Toolbar toolbar = null;
     TextView nav_name,nav_email;
+    public static DataParser dp;
+    String Name ,Email;
 
 
 
@@ -39,9 +43,7 @@ public class AccountActivity extends AppCompatActivity
         Bundle bundle =getIntent().getExtras();
         useremail=bundle.getString("Email");
         Toast.makeText(AccountActivity.this,"Welcome you are logged in using,\n" + useremail,Toast.LENGTH_LONG).show();
-        Log.e("ABC1",useremail);
         new HttpCall().getUserDetails(context, useremail);
-        Log.e("ABClast",useremail);
         HomeFragment fragment = new HomeFragment();
         android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,fragment);
@@ -57,12 +59,17 @@ public class AccountActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        dp=new DataParser();
+        //Email= dp.getArrayList().get(0).email;
+        //Name = dp.getArrayList().get(0).name;
+
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        nav_name = (TextView) findViewById(R.id.nav_name);
-        nav_email = (TextView) findViewById(R.id.nav_email);
-//        nav_name.setText(model_userDetails.name);
-//        nav_email.setText(useremail);
         navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+        nav_name = (TextView) header.findViewById(R.id.nav_name);
+        nav_email = (TextView) header.findViewById(R.id.nav_email);
+//        nav_name.setText(dp.getArrayList().get(0).name);
+      //  nav_email.setText(Email);
 
 
     }

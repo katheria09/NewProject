@@ -117,11 +117,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
                 Email = mAuth.getCurrentUser().getEmail();
-                //Toast.makeText(LoginActivity.this,"Email"+Email,Toast.LENGTH_SHORT).show();
                 new HttpCall().checkGoogleEmail(context, Email);
-               /* Intent i = new Intent(LoginActivity.this, AccountActivity.class);
-                i.putExtra("Email", mAuth.getCurrentUser().getEmail());
-                startActivity(i);*/
             }
             else
                 Log.d(TAG,"Google login failed ");

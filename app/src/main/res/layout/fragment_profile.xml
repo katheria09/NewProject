@@ -47,7 +47,6 @@
                     android:hint="Name"
                     android:inputType="textPersonName"
                     android:lines="1"
-                    android:textSize="12sp"
                     app:met_clearButton="true"
                     app:met_floatingLabel="normal"
                     app:met_floatingLabelText="Name"
@@ -64,7 +63,6 @@
                     android:inputType="phone"
                     android:lines="1"
                     android:maxLength="10"
-                    android:textSize="12sp"
                     app:met_clearButton="true"
                     app:met_floatingLabel="normal"
                     app:met_floatingLabelText="Phone Number"
@@ -79,7 +77,6 @@
                     android:hint="E-mail"
                     android:inputType="textEmailAddress"
                     android:lines="1"
-                    android:textSize="12sp"
                     app:met_clearButton="true"
                     app:met_floatingLabel="normal"
                     app:met_floatingLabelText="E-mail"
@@ -95,7 +92,6 @@
                     android:hint="Date of Birth"
                     android:inputType="date"
                     android:lines="1"
-                    android:textSize="12sp"
                     android:maxLength="10"
                     app:met_clearButton="true"
                     app:met_floatingLabel="normal"
@@ -104,19 +100,84 @@
                     app:met_iconPadding="0dp"
                     app:met_primaryColor="@color/colorPrimary" />
 
+                <Spinner
+                    android:id="@+id/spinner_designation"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/spiiner_background"/>
+
+                <Spinner
+                    android:id="@+id/spinner_designation2"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/spiiner_background">
+
+                </Spinner>
+
                 <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/frag_address"
+                    android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Address"
+                    android:hint="Village or Locality"
                     android:inputType="textPostalAddress"
-                    android:textSize="12sp"
+                    android:maxLines="3"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Village or Locality"
+                    app:met_iconLeft="@drawable/ic_location_city_black_24dp"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/colorPrimary" />
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/block"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Block"
+                    android:inputType="text"
+                    android:lines="1"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Block"
+                    app:met_iconLeft="@drawable/ic_location_city_black_24dp"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/colorPrimary" />
+
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/frag_district"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="District"
+                    android:inputType="textPersonName"
+                    android:lines="1"
                     app:met_clearButton="true"
                     app:met_floatingLabel="normal"
                     app:met_floatingLabelText="Name"
                     app:met_iconLeft="@drawable/ic_location_city_black_24dp"
                     app:met_iconPadding="0dp"
                     app:met_primaryColor="@color/colorPrimary" />
+
+
+
+                <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/frag_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:inputType="textPersonName"
+                    android:lines="1"
+                    app:met_clearButton="true"
+                    app:met_floatingLabel="normal"
+                    app:met_floatingLabelText="Name"
+                    app:met_iconLeft="@drawable/ic_location_city_black_24dp"
+                    app:met_iconPadding="0dp"
+                    app:met_primaryColor="@color/colorPrimary" />
+
+
 
                 <Button
                     android:id="@+id/save"
